@@ -14,7 +14,7 @@ class Login{
 	public function validarLogin($param){
 
 		$seguranca = new Seguranca();
-		$resposta = array("status" => false, "alerta" => "", "nombre" => "", "cedula" => "", "rol" => "", "novoToken" => "");
+		$resposta = array("status" => false, "alerta" => "", "usuario" => array("nombre" => "", "cedula" => "", "rol" => ""), "novoToken" => "");
 
 		// if($seguranca->destinoHttp()){
 		if(1==1){
@@ -26,9 +26,9 @@ class Login{
 				$_SESSION['sessionHash'] = $sessionHash;
 				$resposta["status"] = true;
 				$resposta["alerta"] = 0;
-				$resposta["nombre"] = $_SESSION['usuario']['nombre'];
-				$resposta["cedula"] = $_SESSION['usuario']['cedula'];
-				$resposta["rol"] = $_SESSION['usuario']['rol'];
+				$resposta["usuario"]["nombre"] = $_SESSION['usuario']['nombre'];
+				$resposta["usuario"]["cedula"] = $_SESSION['usuario']['cedula'];
+				$resposta["usuario"]["rol"] = $_SESSION['usuario']['rol'];
 				$resposta['novoToken'] = $seguranca->newToken($_SESSION['usuario']);
 			}else{
 				$resposta["alerta"] = 1;
